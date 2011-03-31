@@ -1,0 +1,37 @@
+This is a Download Manager for Linux
+A prototype by LDM development community
+
+................................................................................................................................
+
+Currently at very basic phase of it's development. The first prototype is transferred to you all to check and verify.
+In case of any problem please post your problems at linkinAnand.blogspot.com.
+By reporting bugs you can contribute to this development.Many of the functionalities are missing from this first prototype
+that you may contribute to develop.
+
+Available functioanilties are youtube downloader and Link downloader.
+Copy any Youtube url press the button with Youtube icon and paste the url their it'll fetch and store the video.
+Copy any download link (right click and copy link location in mozilla) and click the other download button and paste the link their.
+
+By default download location in /home folder that you can change from the GUI.
+For more information watch this video -
+<http://www.youtube.com/watch?v=6VAe6ORt3Ec>
+
+Prefer to set the lower partition level while in slow network speed.It is their in GUI window.
+
+All major observable bugs has been removed and we are still working on it.
+This is not the complete version.You might face some problem while using it and by posting them you are helping us.
+
+By using this software you agree to the terms and policy of LGPL GNU license and you are supposed to inform  the developer about
+any change that you make in the software , in case you transfer it to any other person.
+You are forbidden to sell it in any circumstances.Documentation of source code is under process which will be available soon and I'll
+share all the information about the development , source code and process of method of development through my blog that you may wish
+to visit.
+...................................................................................................................................
+
+Cureently documentation of code is not done well.Therefore you might get into a lot of trouble while modifying it.In case of any problem you can contact the author.He'll be vary happy to help you.
+You can also post your problems to "linkinAnand.blogspot.com"
+
+Anand Kumar
+Developer at IIITA
+In case of any query send your mail to - <linkinAnand@gmail.com>
+"linkinAnand.blogspot.com"

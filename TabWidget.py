@@ -145,7 +145,11 @@ class TabWidget(QtGui.QTableWidget) :
 		for i in range(len(obj.partition)) :
 			dL+=int(obj.partition[i][2])
 			
-		self.setCellWidget(row,2,self.getLabel(str((100*dL)/int(obj.length))+'%',str(100*dL/int(obj.length))))
+                if(obj.length == 0) {
+
+			self.setCellWidget(row,2,self.getLabel(str(0)+'%',str(0)))
+		else
+			self.setCellWidget(row,2,self.getLabel(str((100*dL)/int(obj.length))+'%',str(100*dL/int(obj.length))))
 		self.setCellWidget(row,3,self.getLabel(' - ',status))
 		self.setCellWidget(row,4,self.getLabel(obj.date,str(obj.date)))				
 		self.setCellWidget(row,5,self.getLabel(obj.time,str(obj.time)))

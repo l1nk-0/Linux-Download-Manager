@@ -483,7 +483,6 @@ class YTube_Download :
 		return x
 					
 	def Download(self,url,recv,PARTS,info,wMutex,flag,fileName='') :
-		print 'Reached here'
 		''' Takes a url fetches it's information & partition it to calls download routine '''
 		self.flag=flag # To keep track of signal send to it from GUI
 		self.wMutex=wMutex # Synchronize Loading of information & writing of information of a download
@@ -500,7 +499,6 @@ class YTube_Download :
 			fileName=fileName[len(fileName)-1]
 			
 		fileName = self.InAscii(fileName)
-		print 'Fine till here'
 		req=urllib2.Request(url,None,{'User-Agent':'LINUX DOWNLOAD MANAGER'}) # build the header
 		proXy={}
 		proxy_info=UIXML().getProxyInformation('&LDM')
@@ -528,8 +526,7 @@ class YTube_Download :
 		except Exception,e :
 			print "Error ",str(e)
 			sys.exit(0)
-		
-		print "What the problem"
+
 		s=opener.open(req)
 		
 		''' Read HTTP to get all information '''

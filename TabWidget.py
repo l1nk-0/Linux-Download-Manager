@@ -86,7 +86,7 @@ class TabWidget(QtGui.QTableWidget) :
 				ok=msg.exec_()
 				if ok == QtGui.QMessageBox.Yes :
 					url=str(self.cellWidget(x,0).toolTip())
-					if url.startswith('http://www.youtube.com') :
+					if url.startswith('http://www.youtube.com') or url.startswith('https://www.youtube.com') :
 						self.parent.fetchAndSaveUrl(url,0)
 					else :
 						self.parent.fetchAndSaveUrl(url)

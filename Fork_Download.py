@@ -64,20 +64,29 @@ class Fork_Download :
 		req = urllib2.Request(url) # perform the request from the url
 		proXy={}
 		proxy_info=UIXML().getProxyInformation('&LDM') # If user is working under a proxy , fetches proxy information
-		if len(proxy_info) == 2:
-			proXy['host']=proxy_info[0]
-			proXy['port']=int(proxy_info[1])
-			proxy="http://%(host)s:%(port)d"%proXy
-			opener=urllib2.build_opener(proxy, urllib2.HTTPHandler) # builds a handler with proxy information
-		elif len(proxy_info)==4 :	
-			proXy['host']=proxy_info[0]
-			proXy['port']=int(proxy_info[1])
-			proXy['user']=proxy_info[2]
-			proXy['pass']=proxy_info[3]		
-			proxy="http://%(user)s:%(pass)s@%(host)s:%(port)d"%proXy			
-			opener=urllib2.build_opener(proxy, urllib2.HTTPHandler) # Adds USER & PASS information to handler
-		else :			
-			opener = urllib2.build_opener() # builds an empty handler
+		try :
+			if len(proxy_info) == 2:
+				proXy['host']=str(proxy_info[0])
+				proXy['port']=int(proxy_info[1])
+				proxy="http://%(host)s:%(port)d"%proXy
+				info={"http":""}
+				info["http"]="http://%(host)s:%(port)d"%proXy
+				handler = urllib2.ProxyHandler(info)
+				opener=urllib2.build_opener(handler) # Add proxy information
+			elif len(proxy_info)==4 :	
+				proXy['host']=str(proxy_info[0])
+				proXy['port']=int(proxy_info[1])
+				proXy['user']=str(proxy_info[2])
+				proXy['pass']=str(int(proxy_info[3]))
+				proxy="http://%(user)s:%(pass)s@%(host)s:%(port)d"%proXy
+				info={"http":""}
+				info["http"]="http://%(user)s:%(pass)s@%(host)s:%(port)d"%proXy
+				handler = urllib2.ProxyHandler(info)
+				opener=urllib2.build_opener(handler)	# Add USER & PASS	
+			else :			
+				opener = urllib2.build_opener() # build empty handler	
+		except Exception,e :
+			print "Error : ",str(e)
 			
 		# adds requisite headers to the handler
 		opener.addheaders = [('User-Agent','Magic Browser'),('Range','bytes='+str(obj.LL+obj.length.value)+'-'+str(obj.UL))]
@@ -339,20 +348,29 @@ class YTube_Download :
 			req=urllib2.Request(info.url,None,headers)
 			proXy={}
 			proxy_info=UIXML().getProxyInformation('&LDM')
-			if len(proxy_info) == 2:
-				proXy['host']=proxy_info[0]
-				proXy['port']=int(proxy_info[1])
-				proxy="http://%(host)s:%(port)d"%proXy
-				opener=urllib2.build_opener(proxy, urllib2.HTTPHandler) # Proxy setting
-			elif len(proxy_info)==4 :	
-				proXy['host']=proxy_info[0]
-				proXy['port']=int(proxy_info[1])
-				proXy['user']=proxy_info[2]
-				proXy['pass']=proxy_info[3]		
-				proxy="http://%(user)s:%(pass)s@%(host)s:%(port)d"%proXy			
-				opener=urllib2.build_opener(proxy, urllib2.HTTPHandler)	# Adding USER & PASS		
-			else :			
-				opener = urllib2.build_opener() # build an empty handler
+			try :
+				if len(proxy_info) == 2:
+					proXy['host']=str(proxy_info[0])
+					proXy['port']=int(proxy_info[1])
+					proxy="http://%(host)s:%(port)d"%proXy
+					info={"http":""}
+					info["http"]="http://%(host)s:%(port)d"%proXy
+					handler = urllib2.ProxyHandler(info)
+					opener=urllib2.build_opener(handler) # Add proxy information
+				elif len(proxy_info)==4 :	
+					proXy['host']=str(proxy_info[0])
+					proXy['port']=int(proxy_info[1])
+					proXy['user']=str(proxy_info[2])
+					proXy['pass']=str(int(proxy_info[3]))
+					proxy="http://%(user)s:%(pass)s@%(host)s:%(port)d"%proXy
+					info={"http":""}
+					info["http"]="http://%(user)s:%(pass)s@%(host)s:%(port)d"%proXy
+					handler = urllib2.ProxyHandler(info)
+					opener=urllib2.build_opener(handler)	# Add USER & PASS	
+				else :			
+					opener = urllib2.build_opener() # build empty handler	
+			except Exception,e :
+				print "Error ",str(e)
 			
 			s=opener.open(req).read() # reads html		
 			search=re.search(self.regX,s)	
@@ -408,23 +426,34 @@ class YTube_Download :
 		req=urllib2.Request(url,None,headers)
 		proXy={}
 		proxy_info=UIXML().getProxyInformation('&LDM')
-		if len(proxy_info) == 2:
-			proXy['host']=proxy_info[0]
-			proXy['port']=int(proxy_info[1])
-			proxy="http://%(host)s:%(port)d"%proXy
-			opener=urllib2.build_opener(proxy, urllib2.HTTPHandler) # Add proxy information
-		elif len(proxy_info)==4 :	
-			proXy['host']=proxy_info[0]
-			proXy['port']=int(proxy_info[1])
-			proXy['user']=proxy_info[2]
-			proXy['pass']=proxy_info[3]		
-			proxy="http://%(user)s:%(pass)s@%(host)s:%(port)d"%proXy			
-			opener=urllib2.build_opener(proxy, urllib2.HTTPHandler)	# Add USER & PASS	
-		else :			
-			opener = urllib2.build_opener() # build empty handler
-		
+		try :
+			if len(proxy_info) == 2:
+				proXy['host']=str(proxy_info[0])
+				proXy['port']=int(proxy_info[1])
+				proxy="http://%(host)s:%(port)d"%proXy
+				info={"http":""}
+				info["http"]="http://%(host)s:%(port)d"%proXy
+				handler = urllib2.ProxyHandler(info)
+				opener=urllib2.build_opener(handler) # Add proxy information
+			elif len(proxy_info)==4 :	
+				proXy['host']=str(proxy_info[0])
+				proXy['port']=int(proxy_info[1])
+				proXy['user']=str(proxy_info[2])
+				proXy['pass']=str(int(proxy_info[3]))
+				proxy="http://%(user)s:%(pass)s@%(host)s:%(port)d"%proXy
+				info={"http":""}
+				info["http"]="http://%(user)s:%(pass)s@%(host)s:%(port)d"%proXy
+				handler = urllib2.ProxyHandler(info)
+				opener=urllib2.build_opener(handler)	# Add USER & PASS	
+			else :			
+				opener = urllib2.build_opener() # build empty handler	
+		except Exception,e :
+			print "Error ",str(e)
+			sys.exit(0);
+
+		print "About to fetch page info"		
 		s=opener.open(req).read()
-						
+		print 'Npes opened the link'	
 		search=re.search(self.regX,s)
 			
 		start = s.find('<title>')
@@ -470,25 +499,34 @@ class YTube_Download :
 			fileName=fileName[len(fileName)-1]
 			
 		fileName = self.InAscii(fileName)
-		
 		req=urllib2.Request(url,None,{'User-Agent':'LINUX DOWNLOAD MANAGER'}) # build the header
 		proXy={}
 		proxy_info=UIXML().getProxyInformation('&LDM')
-		if len(proxy_info) == 2:
-			proXy['host']=proxy_info[0]
-			proXy['port']=int(proxy_info[1])
-			proxy="http://%(host)s:%(port)d"%proXy
-			opener=urllib2.build_opener(proxy, urllib2.HTTPHandler) # Add proxy information
-		elif len(proxy_info)==4 :	
-			proXy['host']=proxy_info[0]
-			proXy['port']=int(proxy_info[1])
-			proXy['user']=proxy_info[2]
-			proXy['pass']=proxy_info[3]		
-			proxy="http://%(user)s:%(pass)s@%(host)s:%(port)d"%proXy			
-			opener=urllib2.build_opener(proxy, urllib2.HTTPHandler)	# Add USER & PASS	
-		else :			
-			opener = urllib2.build_opener() # Build empty handler
-		
+		try :
+			if len(proxy_info) == 2:
+				proXy['host']=str(proxy_info[0])
+				proXy['port']=int(proxy_info[1])
+				proxy="http://%(host)s:%(port)d"%proXy
+				info={"http":""}
+				info["http"]="http://%(host)s:%(port)d"%proXy
+				handler = urllib2.ProxyHandler(info)
+				opener=urllib2.build_opener(handler) # Add proxy information
+			elif len(proxy_info)==4 :	
+				proXy['host']=str(proxy_info[0])
+				proXy['port']=int(proxy_info[1])
+				proXy['user']=str(proxy_info[2])
+				proXy['pass']=str(int(proxy_info[3]))
+				proxy="http://%(user)s:%(pass)s@%(host)s:%(port)d"%proXy
+				info={"http":""}
+				info["http"]="http://%(user)s:%(pass)s@%(host)s:%(port)d"%proXy
+				handler = urllib2.ProxyHandler(info)
+				opener=urllib2.build_opener(handler)	# Add USER & PASS	
+			else :			
+				opener = urllib2.build_opener() # build empty handler	
+		except Exception,e :
+			print "Error ",str(e)
+			sys.exit(0)
+
 		s=opener.open(req)
 		
 		''' Read HTTP to get all information '''
